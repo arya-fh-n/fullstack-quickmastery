@@ -1,0 +1,79 @@
+body {
+  margin: 0px;
+  color: rgb(50, 50, 50);
+}
+
+.container-header {
+  background: rgb(50, 50, 50);
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.container-aboutme {
+  text-align: center;
+  background-color: rgb(233, 233, 233);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.container-aboutme > img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.container-body {
+  text-align: center;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-left: 100px;
+  padding-right: 100px;
+  gap: 10px;
+  justify-content: space-around;
+  padding-bottom: 15px;
+}
+
+.project-item {
+  border-radius: 5%;
+  text-align: start;
+  background-color: rgb(233, 233, 233);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.container-skills {
+  text-align: center;
+  padding-top: 10px;
+  background-color: rgb(233, 233, 233);
+}
+
+.flex-skills {
+  background-color: rgb(233, 233, 233);
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+  justify-content: center;
+  padding-bottom: 15px;
+}
+
+.flex-skills > div {
+  background-color: rgb(50, 50, 50);
+  color: white;
+  width: 60px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.container-footer {
+  text-align: center;
+  padding-top: 10px;
+  background-color: rgb(50, 50, 50);
+  color: white;
+  padding-bottom: 15px;
+}
