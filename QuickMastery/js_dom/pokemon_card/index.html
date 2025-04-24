@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Card</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div id="container" class="bg-white p-6 rounded-lg shadow-md">
+      <input
+        id="input"
+        type="text"
+        placeholder="Enter a Pokémon name"
+        class="mb-4 p-2 rounded-lg border border-gray-300"
+      />
+      <button
+        id="search"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Search
+      </button>
+      <div class="mb-4 text-center">
+        <img
+          id="image"
+          class="pkmn_img"
+          alt="Pokemon"
+        />
+      </div>
+      <div id="name" class="text-2xl font-bold mb-2 text-center">Pokemon Name</div>
+      <div id="type" class="mb-4 text-center">Type: </div>
+      <div id="weight" class="mb-4 text-center">Weight: </div>
+      <div id="height" class="mb-4 text-center">Height: </div>
+      <script src="src/dist/index.js"></script>
+    </div>
+    <style>
+      .pkmn_img {
+        display: block;
+        margin: auto;
+        width: 200px;
+      }
+    </style>
+  </body>
+</html>
