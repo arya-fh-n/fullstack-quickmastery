@@ -9,7 +9,8 @@ abstract class Controller {
 }
 
 class UserController extends Controller {
-  private users = [
+
+  users = [
     {
       id: 1,
       name: "John Doe",
@@ -32,7 +33,7 @@ class UserController extends Controller {
     },
   ];
 
-  getAll(req: Request, res: Response) {
+  getAll = (req: Request, res: Response) => {
     res.json({
       status: 200,
       data: this.users,
@@ -40,7 +41,7 @@ class UserController extends Controller {
     });
   }
 
-  getOne(req: Request, res: Response) {
+  getOne = (req: Request, res: Response) => {
     const { id } = req.params;
     const user = this.users.find((user) => user.id === parseInt(id));
     if (user) {
@@ -58,7 +59,7 @@ class UserController extends Controller {
     }
   }
 
-  updateOne(req: Request, res: Response) {
+  updateOne = (req: Request, res: Response) => {
     const { id } = req.params;
     const { name } = req.body;
     const user = this.users.find((user) => user.id === parseInt(id));
@@ -78,7 +79,7 @@ class UserController extends Controller {
     }
   }
 
-  createOne(req: Request, res: Response) {
+  createOne = (req: Request, res: Response) => {
     const { name } = req.body;
     const id = this.users.length + 1;
     const user = { id, name };
@@ -90,9 +91,8 @@ class UserController extends Controller {
     });
   }
 
-  deleteOne(req: Request, res: Response) {
+  deleteOne = (req: Request, res: Response) => {
     const { id } = req.params;
-    this.users = this.users.filter((user) => user.id !== parseInt(id));
     const user = this.users.find((user) => user.id === parseInt(id));
     if (!user) {
       res.json({
@@ -102,6 +102,7 @@ class UserController extends Controller {
       });
       return;
     }
+    this.users = this.users.filter((user) => user.id !== parseInt(id));
     res.json({
       status: 200,
       data: null,
