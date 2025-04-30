@@ -24,7 +24,8 @@
     "start": "node src/dist/server.js",
     "dev": "npx tsc && node src/dist/server.js",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "db:refresh": "drizzle-kit generate && drizzle-kit migrate"
   },
   "keywords": [],
   "author": "",
