@@ -5,13 +5,28 @@
  * @property {Date} updatedAt - The date when the product was last updated.
  */
 export interface ProductType {
-    id: number;
-    name: string;
-    price: number;
-    category: string;
-    stock: number;
-    createdAt: Date;
-    updatedAt: Date;
+  id: number;
+  name: string;
+  price: number;
+  category: string;
+  stock: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CategoryType {
+  id: number;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CartType {
+  id: number;
+  quantity: number | null;
+  total: number;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
 }
 
 /**
@@ -25,10 +40,10 @@ export interface ProductType {
  * @property {number} PORT - The server port number.
  */
 export interface EnvVars {
-    DB_HOST: string;
-    DB_PORT: number;
-    DB_USER: string;
-    DB_PASSWORD: string;
-    DB_NAME: string;
-    PORT: number;
+  DB_HOST: string;
+  DB_PORT: number;
+  DB_USER: string;
+  DB_PASSWORD: string;
+  DB_NAME: string;
+  PORT: number;
 }
