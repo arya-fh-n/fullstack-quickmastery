@@ -1,3 +1,6 @@
+import { InferSelectModel, InferInsertModel } from "drizzle-orm";
+import { cartTable, categoriesTable, productsTable, usersTable } from "src/db/schema";
+
 /**
  * Interface to represent a product
  * @interface ProductType
@@ -47,3 +50,15 @@ export interface EnvVars {
   DB_NAME: string;
   PORT: number;
 }
+
+export type Product = InferSelectModel<typeof productsTable>;
+export type NewProduct = InferInsertModel<typeof productsTable>;
+
+export type User = InferSelectModel<typeof usersTable>;
+export type NewUser = InferInsertModel<typeof usersTable>;
+
+export type Cart = InferSelectModel<typeof cartTable>;
+export type NewCart = InferInsertModel<typeof cartTable>;
+
+export type Category = InferSelectModel<typeof categoriesTable>;
+export type NewCategory = InferInsertModel<typeof categoriesTable>;

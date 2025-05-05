@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { int, float, serial, varchar, boolean, mysqlTable as mySqlTable, timestamp, } from "drizzle-orm/mysql-core";
+import { int, float, serial, varchar, boolean, mysqlTable as mySqlTable, timestamp, mysqlEnum, } from "drizzle-orm/mysql-core";
 // Define database schemas
 export const productsTable = mySqlTable("products", {
     id: serial("id").primaryKey(),
@@ -35,11 +35,15 @@ export const cartTable = mySqlTable("cart", {
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
 });
+export const rolesEnum = mysqlEnum("roles", ["admin", "cashier"]);
 export const usersTable = mySqlTable("users", {
     id: serial("id").primaryKey(),
     username: varchar("username", { length: 255 }).notNull(),
+    fullname: varchar("fullname", { length: 255 }).notNull(),
+    phone_number: varchar("phone_number", { length: 18 }).notNull(),
     password: varchar("password", { length: 255 }).notNull(),
     active: boolean("active").notNull().default(true),
+    role: rolesEnum.notNull().default("cashier"),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
 });

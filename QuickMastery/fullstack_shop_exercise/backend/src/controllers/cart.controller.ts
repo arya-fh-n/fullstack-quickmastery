@@ -2,11 +2,8 @@ import { Request, Response } from "express";
 import AbstractModel from "../abstracts/model.abstract.js";
 import { db } from "../db/index.js";
 import { cartTable, productsTable } from "../db/schema.js";
-import { eq, InferSelectModel, InferInsertModel } from "drizzle-orm";
-import { CartType } from "src/types/index.js";
-
-type Cart = InferSelectModel<typeof cartTable>;
-type NewCart = InferInsertModel<typeof cartTable>;
+import { eq } from "drizzle-orm";
+import { Cart, CartType, NewCart } from "src/types/index.js";
 
 class CartController extends AbstractModel {
   async getById(req: Request, res: Response): Promise<any> {

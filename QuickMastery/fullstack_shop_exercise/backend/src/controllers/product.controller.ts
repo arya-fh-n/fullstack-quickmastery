@@ -2,11 +2,9 @@ import { Request, Response } from "express";
 import AbstractModel from "../abstracts/model.abstract.js";
 import { db } from "../db/index.js";
 import { productsTable } from "../db/schema.js";
-import { eq, InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import dotenv from "dotenv";
-
-type Product = InferSelectModel<typeof productsTable>;
-type NewProduct = InferInsertModel<typeof productsTable>;
+import { Product, NewProduct } from "src/types/index.js";
 
 dotenv.config();
 

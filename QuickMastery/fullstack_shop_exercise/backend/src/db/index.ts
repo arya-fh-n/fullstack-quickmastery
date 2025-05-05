@@ -53,6 +53,9 @@ export async function main() {
   const user: typeof usersTable.$inferInsert = {
     username: "admin",
     password: "admin",
+    fullname: "Admin Shop",
+    phone_number: "081234567890",
+    role: "admin",
     active: true,
   }
 

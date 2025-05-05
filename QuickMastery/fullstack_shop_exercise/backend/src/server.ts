@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import routes from "./routes/index.js";
 import dotenv from "dotenv";
-import { main } from "./db/index.js";
+import { main, testConnection } from "./db/index.js";
 
 // Initialize dotenv
 dotenv.config();
@@ -20,8 +20,8 @@ app.use("/api", routes);
 
 // Listen to port
 async function startServer(): Promise<void> {
-  // const dbConnected = await testConnection();
-  await main();
+  //await testConnection();
+  //await main();
   
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);

@@ -47,6 +47,9 @@ export async function main() {
     const user = {
         username: "admin",
         password: "admin",
+        fullname: "Admin Shop",
+        phone_number: "081234567890",
+        role: "admin",
         active: true,
     };
     await db.insert(usersTable).values(user);

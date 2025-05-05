@@ -2,13 +2,11 @@ import { Request, Response } from "express";
 import AbstractModel from "../abstracts/model.abstract.js";
 import { db } from "../db/index.js";
 import { categoriesTable, productsTable } from "../db/schema.js";
-import { eq, InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import dotenv from "dotenv";
+import { Category, NewCategory } from "src/types/index.js";
 
 dotenv.config();
-
-type Category = InferSelectModel<typeof categoriesTable>;
-type NewCategory = InferInsertModel<typeof categoriesTable>;
 
 // Category controller
 class CategoryController extends AbstractModel {
