@@ -94,7 +94,7 @@ const ProductList = () => {
         </div>
       )}
 
-      {products.length === 0 && status === "succeeded" ? (
+      {(products === undefined || products.length === 0) && status === "succeeded" ? (
         <div className="text-center py-8 bg-gray-50 rounded-lg">
           <p className="text-lg text-gray-600">
             There are currently no products listed.
