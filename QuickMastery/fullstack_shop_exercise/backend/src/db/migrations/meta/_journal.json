@@ -1,0 +1,55 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1745901935598,
+      "tag": "0000_unique_crystal",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1745992822425,
+      "tag": "0001_remarkable_prism",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1746000933444,
+      "tag": "0002_clammy_cyclops",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1746001925489,
+      "tag": "0003_amused_romulus",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1746418175749,
+      "tag": "0004_omniscient_stardust",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1746419247449,
+      "tag": "0005_calm_killraven",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1746419295129,
+      "tag": "0006_gigantic_gladiator",
+      "breakpoints": true
+    }
+  ]
+}
