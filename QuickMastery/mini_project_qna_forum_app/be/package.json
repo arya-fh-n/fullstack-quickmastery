@@ -1,0 +1,40 @@
+{
+  "name": "qna_forum_be",
+  "version": "1.0.0",
+  "description": "Back-end for QnA Forum Web App",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node src/dist/server.js",
+    "dev": "npx tsc && node src/dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:refresh": "drizzle-kit generate && drizzle-kit migrate"
+  },
+  "author": "Arya",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "drizzle-kit": "^0.31.1",
+    "drizzle-orm": "^0.43.1",
+    "express": "^5.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1",
+    "tsx": "^4.19.4",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/joi": "^17.2.2",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.15.11",
+    "nodemon": "^3.1.10"
+  }
+}
