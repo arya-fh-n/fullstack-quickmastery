@@ -12,6 +12,6 @@ export default {
     port: process.env.DB_PORT ?? 3306,
     user: process.env.DB_USER ?? "root",
     password: process.env.DB_PASSWORD ?? "",
-    database: process.env.DB_NAME ?? "my_express_app",
+    database: process.env.DB_NAME ?? "mini_project_qna_forum",
   },
 } as Config;
