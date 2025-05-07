@@ -11,7 +11,7 @@ import {
 } from "src/types/index.js";
 import dotenv from "dotenv";
 import { forums as ForumsTable, users as UsersTable } from "../db/schema.js";
-import { generatePostId } from "src/utils/generator.utils.js";
+import { generatePostId } from "../utils/generator.utils.js";
 import { eq, and, isNull } from "drizzle-orm";
 
 dotenv.config();

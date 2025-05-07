@@ -3,7 +3,7 @@ import { NewUser, RegisterUser } from "src/types/index.js";
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { users as UsersTable } from "../db/schema.js";
-import { generateUserId } from "src/utils/generator.utils.js";
+import { generateUserId } from "../utils/generator.utils.js";
 
 
 class AuthService {

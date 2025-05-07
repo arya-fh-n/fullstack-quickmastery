@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import AuthService from "src/service/auth.service";
+import AuthService from "../service/auth.service";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import Jwt from "jsonwebtoken";

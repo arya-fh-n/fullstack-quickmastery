@@ -1,6 +1,6 @@
 import express from "express";
 import ForumsController from "../controllers/forums.controller.js";
-import { authenticateToken } from "src/middleware/auth.middleware.js";
+import { authenticateToken } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
