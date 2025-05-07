@@ -1,5 +1,5 @@
 import { db } from "../db/index.js";
-import { NewLogs, NewPostHistory, UserPostHistory } from "src/types/index.js";
+import { NewLogs, NewPostHistory, UserPostHistory } from "../types/index.js";
 import dotenv from "dotenv";
 import { forums as ForumsTable, logs as HistoryTable } from "../db/schema.js";
 import { eq } from "drizzle-orm";

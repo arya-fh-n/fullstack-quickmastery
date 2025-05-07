@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import AuthService from "../service/auth.service";
+import AuthService from "../service/auth.service.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import Jwt from "jsonwebtoken";
+import { generateTokens } from "../utils/token.utils.js";
 
 dotenv.config();
 
@@ -24,51 +24,40 @@ class AuthController {
       if (!user) {
         res.status(401).json({
           status: "Unauthorized",
-          error: "Username and/or password are invalid"
+          error: "Username and/or password are invalid",
         });
         return;
       }
-      
+
       const isValid = await bcrypt.compare(password, user?.password);
-      
+
       if (!isValid) {
         res.status(401).json({
           status: "Unauthorized",
-          error: "Username and/or password are invalid"
+          error: "Username and/or password are invalid",
         });
         return;
       }
 
-      const encodedPayloadBase64 = Buffer.from(
-        JSON.stringify({
-          id: user.id,
-          username: user.username,
-          email: user.email
-        })
-      ).toString("base64");
-
-      logPayload(encodedPayloadBase64);
-
-      const token = Jwt.sign(
-        { ___: encodedPayloadBase64 },
-        process.env.JWT_SECRET_KEY as string,
-        {
-          expiresIn: rememberMe ? "7d" : "1d",
-        }
+      const { accessToken } = generateTokens(
+        user.id,
+        user.username,
+        user.email,
+        rememberMe
       );
 
-      console.log("JWT: ", token);
+      console.log("JWT: ", accessToken);
 
       if (process.env.NODE_ENV === "development") {
-        console.log("Set Cookie: ", token);
-        res.cookie("accessToken", token, {
+        console.log("Set Cookie: ", accessToken);
+        res.cookie("accessToken", accessToken, {
           expires: new Date(Date.now() + 1000 * 60 * 60 * 1),
           httpOnly: true,
           sameSite: "lax",
           secure: false,
         });
       } else {
-        res.cookie("accessToken", token, {
+        res.cookie("accessToken", accessToken, {
           expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
           httpOnly: true,
           sameSite: "lax",
@@ -78,7 +67,7 @@ class AuthController {
 
       res.status(200).json({
         status: "Success",
-        message: "User logged in successfully"
+        message: "User logged in successfully",
       });
     } catch (error: any) {
       console.error("Error logging in user:", error);
@@ -93,7 +82,7 @@ class AuthController {
   async register(req: Request, res: Response): Promise<void> {
     try {
       const { username, password, email } = req.body;
-      const credentialsAreEmpty = !username || !password || !email
+      const credentialsAreEmpty = !username || !password || !email;
       if (credentialsAreEmpty) {
         res.status(400).json({
           status: "Bad Request",
@@ -105,12 +94,12 @@ class AuthController {
       await AuthService.register({
         username,
         password,
-        email
+        email,
       });
 
       res.status(200).json({
         status: "Success",
-        message: "User registered successfully"
+        message: "User registered successfully",
       });
     } catch (error: any) {
       console.error("Error registering user:", error);
@@ -125,7 +114,7 @@ class AuthController {
   async registerAdmin(req: Request, res: Response): Promise<void> {
     try {
       const { username, password, email } = req.body;
-      const credentialsAreEmpty = !username || !password || !email
+      const credentialsAreEmpty = !username || !password || !email;
       if (credentialsAreEmpty) {
         res.status(400).json({
           status: "Bad Request",
@@ -137,12 +126,12 @@ class AuthController {
       await AuthService.registerAdmin({
         username,
         password,
-        email
+        email,
       });
 
       res.status(200).json({
         status: "Success",
-        message: "User registered successfully"
+        message: "User registered successfully",
       });
     } catch (error: any) {
       console.error("Error registering user:", error);
@@ -153,15 +142,6 @@ class AuthController {
       return;
     }
   }
-}
-
-function logPayload(payload: string) {
-  const decodedPayloadBase64 = JSON.parse(
-    Buffer.from(payload, "base64").toString("utf8")
-  );
-
-  console.log("Login: encodedPayloadBase64: ", payload);
-  console.log("Login: decodedPayloadBase64: ", decodedPayloadBase64);
 }
 
 export default new AuthController();

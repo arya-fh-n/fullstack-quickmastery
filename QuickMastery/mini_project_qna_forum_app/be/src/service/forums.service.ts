@@ -8,7 +8,7 @@ import {
   AdminUpdatePostStatus,
   UserForumPostDetail,
   UserForumPostListItem,
-} from "src/types/index.js";
+} from "../types/index.js";
 import dotenv from "dotenv";
 import { forums as ForumsTable, users as UsersTable } from "../db/schema.js";
 import { generatePostId } from "../utils/generator.utils.js";
