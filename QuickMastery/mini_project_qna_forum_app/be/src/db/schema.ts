@@ -5,7 +5,6 @@ import {
   timestamp,
   mysqlEnum,
   foreignKey,
-  json,
   text,
   longtext,
 } from "drizzle-orm/mysql-core";
@@ -45,6 +44,8 @@ export const users = mysqlTable("users", {
  * 
  * **userId**: **user_id** char(36), ID dari user (relasi ke tabel users)
  * 
+ * **title**: **title** varchar(255), Judul dari forum
+ * 
  * **content**: **content** text, Isi dari forum
  * 
  * **parentId (FK -> self)**: **parent_id** char(36), Id dari forum utama (Nullable)
@@ -69,7 +70,7 @@ export const forums = mysqlTable(
     content: text("content").notNull(),
     parentId: char("parent_id", { length: 16 }),
     status: statusEnum.notNull().default("pending"),
-    data: longtext("data").default("{}"),
+    data: longtext("data"),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
   },
@@ -112,7 +113,7 @@ export const logs = mysqlTable("logs", {
   code: varchar("code", { length: 255 }).notNull().default("FORUM"),
   action: actionEnum.notNull(),
   description: varchar("description", { length: 255 }).notNull(),
-  data: json("data"),
+  data: longtext("data"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow().onUpdateNow(),
 });

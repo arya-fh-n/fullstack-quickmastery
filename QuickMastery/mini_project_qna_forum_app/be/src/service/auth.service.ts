@@ -1,11 +1,10 @@
 import { db } from "../db/index.js";
-import { NewUser } from "src/types/index.js";
+import { NewUser, RegisterUser } from "src/types/index.js";
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { users as UsersTable } from "../db/schema.js";
-import { generateUserId } from "src/utils/utils.js";
+import { generateUserId } from "src/utils/generator.utils.js";
 
-type RegisterUser = Omit<NewUser, "id" | "createdAt" | "updatedAt">;
 
 class AuthService {
 
@@ -26,14 +25,14 @@ class AuthService {
             return user;
         } catch (error) {
             console.error("Error logging in:", error);
-            throw new Error("An unexpected error occured: " + error);
+            return null;
         }
     }
 
     async register(data: RegisterUser) {
         try {
             const hashedPassword = await bcrypt.hash(data.password, 10);
-            const newUser: NewUser = { ...data, id: generateUserId("user"), password: hashedPassword };
+            const newUser: NewUser = { ...data, id: generateUserId("user"), password: hashedPassword, role: "user" };
             const user = await db.insert(UsersTable).values(newUser);
             return user;
         } catch (error) {
@@ -45,7 +44,7 @@ class AuthService {
     async registerAdmin(data: RegisterUser) {
         try {
             const hashedPassword = await bcrypt.hash(data.password, 10);
-            const newUser: NewUser = { ...data, id: generateUserId("admin"), password: hashedPassword };
+            const newUser: NewUser = { ...data, id: generateUserId("admin"), password: hashedPassword, role: "admin" };
             const user = await db.insert(UsersTable).values(newUser);
             return user;
         } catch (error) {

@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-// import { cleanTables, seed, seedThenClean } from "./db/index.js"; /** Seeding */
+import { cleanTables, seed, seedThenClean } from "./db/index.js"; /** Seeding */
+import routes from "./routes/index.js";
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 // Define route
-// app.use("/api", routes);
+app.use("/forum/api", routes);
 
 // Listen
 async function startServer(): Promise<void> {

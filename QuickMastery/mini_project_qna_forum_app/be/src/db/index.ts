@@ -3,7 +3,7 @@ import { EnvVars } from "src/types";
 import mysql from "mysql2/promise";
 import * as schema from "./schema.js";
 import { drizzle } from "drizzle-orm/mysql2";
-import { generatePostId, generateUserId } from "../utils/utils.js";
+import { generatePostId, generateUserId } from "../utils/generator.utils.js";
 import { v4 as uuidv4 } from "uuid";
 
 dotenv.config();
@@ -79,7 +79,7 @@ export async function seed() {
     content: "Ini adalah forum pertama",
     parentId: null,
     status: "published",
-    data: JSON.stringify({ forum_title: "Test Forum", answered: true }),
+    data: JSON.stringify({ answered: true }),
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -92,8 +92,8 @@ export async function seed() {
     parentId: postId1,
     status: "published",
     data: null,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date(new Date().getTime() + 2 * 60 * 60 * 1000),
+    updatedAt: new Date(new Date().getTime() + 2 * 60 * 60 * 1000),
   };
 
   const forumComment2: typeof schema.forums.$inferInsert = {
@@ -104,8 +104,8 @@ export async function seed() {
     parentId: postId2,
     status: "pending",
     data: null,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date(new Date().getTime() + 3 * 60 * 60 * 1000),
+    updatedAt: new Date(new Date().getTime() + 3 * 60 * 60 * 1000),
   };
 
   await db.insert(schema.forums).values(forumPost);
