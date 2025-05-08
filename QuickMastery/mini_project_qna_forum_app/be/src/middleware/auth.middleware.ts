@@ -33,3 +33,38 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
     next();
   });
 };
+
+export const authenticateAdmin = (req: Request, res: Response, next: NextFunction): void => {
+  const token = req.cookies.accessToken;
+  if (!token) {
+    const error: BaseResponse = {
+      status: "Auth Error",
+      message: "Authentication required",
+    };
+    res.status(401).json(error);
+    return;
+  }
+
+  jwt.verify(token, JWT_SECRET_KEY, (err: any, decoded: any) => {
+    if (err) {
+      const error: BaseResponse = {
+        status: "Token Error",
+        message: "Invalid or expired token",
+      };
+
+      res.status(403).json(error);
+      return;
+    }
+
+    if (decoded.role !== "admin") {
+      const error: BaseResponse = {
+        status: "Auth Error",
+        message: "Admin privileges required",
+      };
+      res.status(401).json(error);
+      return;
+    }
+
+    next();
+  }); 
+};

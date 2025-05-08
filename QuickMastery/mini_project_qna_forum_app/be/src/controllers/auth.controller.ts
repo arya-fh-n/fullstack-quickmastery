@@ -18,7 +18,7 @@ class AuthController {
         });
         return;
       }
-      
+
       if (rememberMe === null || rememberMe === undefined) {
         res.status(400).json({
           status: "Bad Request",
@@ -51,6 +51,7 @@ class AuthController {
         user.id,
         user.username,
         user.email,
+        user.role,
         rememberMe
       );
 
@@ -143,6 +144,34 @@ class AuthController {
       });
     } catch (error: any) {
       console.error("Error registering user:", error);
+      res.status(500).json({
+        status: "Error",
+        message: error.message,
+      });
+      return;
+    }
+  }
+
+  async logout(req: Request, res: Response) {
+    try {
+      // Clear cookies
+      console.log("Remove Cookie");
+       if (process.env.NODE_ENV === "development") {
+        res.clearCookie("accessToken", { 
+          httpOnly: true, 
+          sameSite: "lax",
+          secure: false
+         });
+      } else {
+        res.clearCookie("accessToken", { 
+          httpOnly: true, 
+          sameSite: "lax",
+          secure: true
+         });
+      }
+      res.status(200).json({ status: "Success", message: "Logout successful" });
+    } catch (error: any) {
+      console.error("Error logging out user:", error);
       res.status(500).json({
         status: "Error",
         message: error.message,

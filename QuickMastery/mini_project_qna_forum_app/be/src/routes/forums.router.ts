@@ -1,6 +1,6 @@
 import express from "express";
 import ForumsController from "../controllers/forums.controller.js";
-import { authenticateToken } from "../middleware/auth.middleware.js";
+import { authenticateToken, authenticateAdmin } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.post("/", ForumsController.createNewForum);
 router.post("/", ForumsController.commentOnForum);
 
 // Admin Only
-router.get("/admin", ForumsController.getForumListAdmin);
-router.put("/:id", ForumsController.updatePostStatus);
+router.get("/admin", authenticateAdmin, ForumsController.getForumListAdmin);
+router.put("/:id", authenticateAdmin, ForumsController.updatePostStatus);
 
 export default router;

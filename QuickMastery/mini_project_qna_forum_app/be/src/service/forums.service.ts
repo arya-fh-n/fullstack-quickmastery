@@ -231,7 +231,9 @@ async function getForumPostDetail(
   // Walk up to the root
   let currentId = id;
   while (postLookup[currentId]?.parentId !== null) {
-    currentId = postLookup[currentId].parentId!;
+    const current = postLookup[currentId];
+    if (!current || current.parentId === null) break;
+    currentId = current.parentId;
   }
 
   // Set root post
@@ -245,9 +247,13 @@ async function getForumPostDetail(
     stack.push(rootPost);
   }
 
+  const visited = new Set<string>();
+
   while (stack.length > 0) {
     const currentPost = stack.pop();
-    if (!currentPost) continue;
+    if (!currentPost || visited.has(currentPost.id)) continue;
+
+    visited.add(currentPost.id);
 
     const comments = Object.values(postLookup).filter(
       (post) => post.parentId === currentPost.id
@@ -256,7 +262,7 @@ async function getForumPostDetail(
     for (const child of comments) {
       const { comments: _, ...flatChild } = child;
       allComments.push(flatChild);
-      if (child) {
+      if (child && !visited.has(child.id)) {
         stack.push(child);
       }
     }
