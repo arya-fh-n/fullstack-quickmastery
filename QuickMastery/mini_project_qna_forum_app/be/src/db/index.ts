@@ -5,6 +5,7 @@ import * as schema from "./schema.js";
 import { drizzle } from "drizzle-orm/mysql2";
 import { generatePostId, generateUserId } from "../utils/generator.utils.js";
 import { v4 as uuidv4 } from "uuid";
+import bcrypt from "bcrypt";
 
 dotenv.config();
 
@@ -48,15 +49,19 @@ export async function testConnection(): Promise<boolean> {
 const adminId = generateUserId("admin");
 const userId = generateUserId("user");
 
+
 const postId1 = generatePostId(process.env.POST_ID_SEQ as string);
 const postId2 = generatePostId(process.env.POST_ID_SEQ as string);
 const postId3 = generatePostId(process.env.POST_ID_SEQ as string);
 
 export async function seed() {
+  const password1 = await bcrypt.hash("admin", 10);
+  const password2 = await bcrypt.hash("user", 10);
+
   const admin: typeof schema.users.$inferInsert = {
     id: adminId,
     username: "admin",
-    password: "admin",
+    password: password1,
     email: "adminmail@gmail.com",
     role: "admin",
   };
@@ -64,7 +69,7 @@ export async function seed() {
   const user: typeof schema.users.$inferInsert = {
     id: userId,
     username: "user",
-    password: "user",
+    password: password2,
     email: "usermail@outlook.com",
     role: "user",
   };

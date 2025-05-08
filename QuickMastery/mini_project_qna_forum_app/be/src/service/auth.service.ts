@@ -25,7 +25,7 @@ class AuthService {
             return user;
         } catch (error) {
             console.error("Error logging in:", error);
-            return null;
+            throw new Error("An unexpected error occured: " + error);
         }
     }
 
@@ -37,7 +37,7 @@ class AuthService {
             return user;
         } catch (error) {
             console.error("Error registering user: ", error);
-            return null;
+            throw new Error("An unexpected error occured: " + error);
         }
     }
 
@@ -49,7 +49,7 @@ class AuthService {
             return user;
         } catch (error) {
             console.error("Error registering admin: ", error);
-            return null;
+            throw new Error("An unexpected error occured: " + error);
         }
     }
 

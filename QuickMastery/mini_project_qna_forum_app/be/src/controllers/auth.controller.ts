@@ -18,6 +18,14 @@ class AuthController {
         });
         return;
       }
+      
+      if (rememberMe === null || rememberMe === undefined) {
+        res.status(400).json({
+          status: "Bad Request",
+          error: "Client must sent 'rememberMe'",
+        });
+        return;
+      }
 
       const user = await AuthService.login(username, password);
 
