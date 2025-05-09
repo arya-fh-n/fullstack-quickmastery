@@ -32,7 +32,7 @@ export type UserForumPost = Omit<Forums, "updatedAt" | "userId">;
 export type UserForumPostDetail = UserForumPost & { comments: UserForumPost[] };
 export type UserForumPostListItem = Omit<
   UserForumPost,
-  "id" | "parentId" | "status"
+  "parentId" | "status"
 > & {
   username: string;
 };

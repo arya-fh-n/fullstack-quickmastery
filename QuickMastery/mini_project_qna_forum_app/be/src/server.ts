@@ -20,7 +20,7 @@ app.use(cookieParser());
 // Use cors (currently running on local machine)
 app.use(cors(
     {
-        origin: "*",
+        origin: "http://localhost:5173",
         credentials: true
     }
 ));

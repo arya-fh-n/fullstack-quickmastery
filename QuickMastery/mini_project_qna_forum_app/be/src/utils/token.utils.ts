@@ -13,7 +13,7 @@ export const generateTokens = (
   rememberMe: boolean = false
 ) => {
   // Access token with short expiry
-  const accessToken = jwt.sign({ id: userId, username, email, role }, JWT_SECRET, {
+  const accessToken = jwt.sign({ userId, username, email, role }, JWT_SECRET, {
     expiresIn: rememberMe ? "7d" : "1d",
   });
 

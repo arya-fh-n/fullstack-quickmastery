@@ -4,7 +4,7 @@ import { authenticateToken, authenticateAdmin } from "../middleware/auth.middlew
 
 const router = express.Router();
 
-router.use(authenticateToken);
+// router.use(authenticateToken);
 
 // User + Admin
 router.get("/", ForumsController.getForumList);

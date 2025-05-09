@@ -77,6 +77,12 @@ class AuthController {
       res.status(200).json({
         status: "Success",
         message: "User logged in successfully",
+        data: {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+          role: user.role,
+        },
       });
     } catch (error: any) {
       console.error("Error logging in user:", error);

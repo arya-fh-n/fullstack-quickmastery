@@ -133,6 +133,7 @@ class ForumsService {
     try {
       const forums = await db
         .select({
+          id: ForumsTable.id,
           title: ForumsTable.title,
           content: ForumsTable.content,
           data: ForumsTable.data,
@@ -145,6 +146,7 @@ class ForumsService {
 
       const forumsData: UserForumPostListItem[] = forums.map(
         (forum) => ({
+          id: forum.id,
           title: forum.title,
           content: forum.content,
           data: JSON.parse(forum.data ?? "{}"),

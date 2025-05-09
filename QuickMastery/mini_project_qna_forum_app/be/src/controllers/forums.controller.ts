@@ -10,21 +10,40 @@ import {
   NewForumComment,
   NewForumPost,
 } from "src/types/index.js";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+
+dotenv.config();
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY ?? "";
 
 class ForumsController {
   async createNewForum(req: Request, res: Response) {
     try {
       const data = req.body;
 
+      const token = req.cookies.accessToken;
+
+      const decoded = decodeAccessTokenCookie(token);
+      if (!decoded) {
+        const error: BaseResponse = {
+          status: "Token Error",
+          message: "Invalid or expired token",
+        };
+
+        res.status(403).json(error);
+        return;
+      }
+
       const body: NewForumPost = {
-        userId: data.userId,
+        userId: decoded.userId,
         title: data.title,
         content: data.content,
         data: JSON.stringify(data.data),
         status: "pending",
       };
-
+  
       await ForumsService.postNewForum(body);
+
       const response: BaseResponse = {
         status: "Success",
         message: "Forum created successfully",
@@ -175,6 +194,15 @@ class ForumsController {
       console.error("Error updating post status: ", error);
       res.status(500).json({ error: "Failed to update post status" });
     }
+  }
+}
+
+
+function decodeAccessTokenCookie(token: string): any {
+  try {
+    return jwt.verify(token, JWT_SECRET_KEY);
+  } catch (error: any) {
+    return error;
   }
 }
 
